@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="حائط القيمة: مواقف تكتبها الطالبات وتظهر بعد اعتماد المعلمة.">
+<title>سفيرات القيم</title>
+<link href="https://fonts.googleapis.com/css2?family=Reem+Kufi:wght@500;700&family=IBM+Plex+Sans+Arabic:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#1E2A4A; --ink-soft:#4A5677; --sky:#DCE7F5; --page:#F3F6FB; --paper:#FFFFFF;
+  --lilac:#8E77C9; --lilac-soft:#ECE6F8; --gold:#D9A93A; --line:#D5DDEA;
+  --ok:#2F8A64; --no:#B9474A;
+  --btn:#2F8FCB; --btn-text:#FFFFFF; --banner-a:#CDEEFC; --banner-b:#8FD3F4; --banner-text:#123A55;
+}
+@media (prefers-color-scheme: dark){
+  :root{
+    color-scheme: dark;
+    --ink:#E7ECF6; --ink-soft:#A9B3CA; --sky:#1F2A44; --page:#141B2D; --paper:#1B2338;
+    --lilac:#B7A5EC; --lilac-soft:#2B2848; --gold:#E8C064; --line:#2E3956;
+    --ok:#5CC497; --no:#E7797C;
+    --btn:#5BB8EC; --btn-text:#0E2233; --banner-a:#2E7BA6; --banner-b:#1D5A80; --banner-text:#FFFFFF;
+  }
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:"IBM Plex Sans Arabic",sans-serif;background:var(--page);color:var(--ink);line-height:1.75;padding-bottom:92px;min-height:100vh}
+button,input,textarea,select{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--lilac);outline-offset:2px}
+.wrap{max-width:720px;margin:0 auto;padding:0 18px}
+
+/* Banner */
+.banner{background:linear-gradient(160deg,var(--banner-a),var(--banner-b));color:var(--banner-text);position:relative;overflow:hidden;padding:42px 0 64px}
+.banner h1{font-family:"Reem Kufi",sans-serif;font-size:clamp(2.2rem,8vw,3.4rem);line-height:1.2;font-weight:700}
+.banner p{opacity:.85;margin-top:8px;max-width:30ch;font-size:1.05rem}
+.stars{position:absolute;inset:0;pointer-events:none}
+.stars span{position:absolute;width:3px;height:3px;border-radius:50%;background:#fff;opacity:.6}
+.dawn{position:absolute;left:-60px;bottom:-140px;width:280px;height:280px;border-radius:50%;background:radial-gradient(circle,#F6D37A 0%,#D9A93A 45%,transparent 70%);opacity:.9}
+
+main{margin-top:-30px;position:relative}
+.panel{background:var(--paper);border:1px solid var(--line);border-radius:22px;padding:22px;margin-bottom:18px}
+h2{font-family:"Reem Kufi",sans-serif;font-size:1.5rem;font-weight:700}
+.sub{color:var(--ink-soft);margin-top:2px}
+.view{display:none}.view.on{display:block}
+
+.btn{border:0;border-radius:14px;padding:12px 20px;font-weight:600;cursor:pointer;background:var(--btn);color:var(--btn-text)}
+.btn.alt{background:var(--lilac-soft);color:var(--ink)}
+.btn.sm{padding:7px 14px;font-size:.92rem;border-radius:10px}
+.btn.ok{background:var(--ok);color:#fff}.btn.no{background:var(--no);color:#fff}
+.row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+
+/* Notes */
+.notes{display:grid;gap:14px;margin-top:16px}
+.note{background:var(--page);border-radius:4px 18px 18px 18px;padding:16px 18px;position:relative;border-right:4px solid var(--lilac)}
+.note:nth-child(3n+2){border-right-color:var(--gold)}
+.note:nth-child(3n){border-right-color:var(--ok)}
+.note p{white-space:pre-wrap}
+.note .who{margin-top:10px;color:var(--ink-soft);font-size:.9rem;display:flex;justify-content:space-between;gap:8px}
+.seal{position:absolute;top:-10px;left:14px;width:46px;height:46px;border-radius:50%;border:2px dashed var(--gold);color:var(--gold);display:grid;place-items:center;font-size:.7rem;font-weight:600;transform:rotate(-14deg);background:var(--paper)}
+.empty{text-align:center;padding:28px 10px;color:var(--ink-soft)}
+
+/* Form */
+label{display:block;font-weight:600;margin:14px 0 6px}
+input,textarea,select{width:100%;background:var(--page);border:1px solid var(--line);border-radius:12px;padding:11px 14px}
+textarea{min-height:130px;resize:vertical}
+.hint{font-size:.88rem;color:var(--ink-soft);margin-top:4px}
+
+/* Ambassadors */
+.amb{display:flex;align-items:center;gap:14px;padding:12px 0;border-bottom:1px solid var(--line)}
+.amb:last-child{border-bottom:0}
+.av{width:44px;height:44px;border-radius:50%;background:var(--lilac-soft);color:var(--lilac);display:grid;place-items:center;font-family:"Reem Kufi";font-size:1.2rem;flex-shrink:0}
+.amb .n{font-weight:600}.amb .c{color:var(--ink-soft);font-size:.88rem}
+.amb .k{margin-inline-start:auto;font-family:"Reem Kufi";font-size:1.3rem;color:var(--gold)}
+
+/* Challenge */
+.lock{text-align:center;padding:30px 10px}
+.lock .ico{font-size:2.6rem}
+.chal{background:var(--lilac-soft);border-radius:18px;padding:20px;margin-top:14px;font-size:1.1rem}
+
+/* Tabs */
+nav.tabs{position:fixed;bottom:0;inset-inline:0;background:var(--paper);border-top:1px solid var(--line);display:flex;justify-content:center;z-index:5}
+nav.tabs .in{display:flex;width:100%;max-width:720px}
+nav.tabs button{flex:1;background:none;border:0;padding:10px 4px 14px;cursor:pointer;color:var(--ink-soft);font-size:.85rem;display:flex;flex-direction:column;align-items:center;gap:2px}
+nav.tabs button .i{font-size:1.35rem}
+nav.tabs button.on{color:var(--btn);font-weight:600}
+nav.tabs button.on .i{transform:translateY(-2px)}
+
+.toast{position:fixed;bottom:100px;left:50%;transform:translateX(-50%);background:var(--btn);color:var(--btn-text);padding:10px 18px;border-radius:12px;opacity:0;transition:opacity .25s;pointer-events:none;z-index:9}
+.toast.on{opacity:1}
+footer{text-align:center;color:var(--ink-soft);font-size:.85rem;padding:10px 0 20px}
+footer button{background:none;border:0;color:var(--ink-soft);text-decoration:underline;cursor:pointer}
+.pend{border:1px solid var(--line);border-radius:14px;padding:14px;margin-top:12px}
+@media (prefers-reduced-motion: reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+
+<header class="banner">
+  <div class="stars" id="stars"></div>
+  <div class="dawn"></div>
+  <div class="wrap" style="position:relative">
+    <h1>سفيرات القيم</h1>
+    <p>الصدق ممارسة نعيشها كل يوم، لا نشاط ننساه</p>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <!-- الرئيسية -->
+  <section class="view on" id="v-home">
+    <div class="panel">
+      <h2>شاركي موقفك</h2>
+      <p class="sub">اكتبي موقفًا صادقًا عشتِه، وسيظهر على الحائط بعد اعتماد المعلمة.</p>
+      <div class="row" style="margin-top:14px">
+        <button class="btn" onclick="openForm()">اكتبي موقفك</button>
+      </div>
+      <div id="formBox" style="display:none">
+        <label for="fName">اسمك</label>
+        <input id="fName" maxlength="40" autocomplete="off">
+        <label for="fClass">الصف</label>
+        <input id="fClass" maxlength="20" placeholder="مثال: ٢/١">
+        <label for="fText">الموقف</label>
+        <textarea id="fText" maxlength="500" placeholder="ماذا حدث؟ وكيف كان الصدق هو اختيارك؟"></textarea>
+        <p class="hint"><span id="cnt">0</span> / ٥٠٠ حرف</p>
+        <div class="row" style="margin-top:14px">
+          <button class="btn" onclick="submitStory()">أرسلي الموقف</button>
+          <button class="btn alt" onclick="closeForm()">إلغاء</button>
+        </div>
+      </div>
+    </div>
+    <div class="panel">
+      <h2>آخر مواقف</h2>
+      <p class="sub">مواقف حقيقية كتبتها الطالبات، وظهرت بعد اعتماد المعلمة.</p>
+      <div class="notes" id="latest"></div>
+    </div>
+  </section>
+
+  <!-- السفيرات -->
+  <section class="view" id="v-amb">
+    <div class="panel">
+      <h2>السفيرات</h2>
+      <p class="sub">كل موقف معتمد يضيف نجمة لصاحبته.</p>
+      <div id="ambList" style="margin-top:10px"></div>
+    </div>
+  </section>
+
+  <!-- الحائط -->
+  <section class="view" id="v-wall">
+    <div class="panel">
+      <h2>حائط القيمة</h2>
+      <p class="sub" id="wallCount"></p>
+      <div class="notes" id="wall"></div>
+    </div>
+  </section>
+
+  <!-- التحدي -->
+  <section class="view" id="v-ch">
+    <div class="panel" id="chBox"></div>
+  </section>
+
+  <!-- المعلمة -->
+  <section class="view" id="v-teacher">
+    <div class="panel" id="tLogin">
+      <h2>دخول المعلمة</h2>
+      <label for="pin">الرمز السري</label>
+      <input id="pin" type="password" inputmode="numeric">
+      <p class="hint">الرمز الافتراضي ١٢٣٤، غيّريه بعد الدخول.</p>
+      <div class="row" style="margin-top:14px">
+        <button class="btn" onclick="login()">دخول</button>
+        <button class="btn alt" onclick="go('home')">رجوع</button>
+      </div>
+    </div>
+    <div id="tPanel" style="display:none">
+      <div class="panel">
+        <h2>مواقف تنتظر الاعتماد</h2>
+        <div id="pending"></div>
+      </div>
+      <div class="panel">
+        <h2>تحدي الأسبوع</h2>
+        <label for="chText">نص التحدي</label>
+        <textarea id="chText" style="min-height:90px"></textarea>
+        <div class="row" style="margin-top:12px">
+          <button class="btn" onclick="saveChallenge(true)">انشري التحدي</button>
+          <button class="btn alt" onclick="saveChallenge(false)">اقفلي التحدي</button>
+        </div>
+      </div>
+      <div class="panel">
+        <h2>المواقف المعتمدة</h2>
+        <div id="approvedAdmin"></div>
+      </div>
+      <div class="panel">
+        <h2>الإعدادات</h2>
+        <label for="newPin">رمز سري جديد</label>
+        <input id="newPin" type="password" inputmode="numeric">
+        <div class="row" style="margin-top:12px">
+          <button class="btn" onclick="changePin()">احفظي الرمز</button>
+          <button class="btn alt" onclick="logout()">خروج</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer><button onclick="go('teacher')">دخول المعلمة</button></footer>
+</main>
+
+<nav class="tabs" aria-label="التنقل">
+  <div class="in">
+    <button data-v="home" class="on" onclick="go('home')"><span class="i">🏠</span>الرئيسية</button>
+    <button data-v="amb" onclick="go('amb')"><span class="i">🎖️</span>السفيرات</button>
+    <button data-v="wall" onclick="go('wall')"><span class="i">🧱</span>الحائط</button>
+    <button data-v="ch" onclick="go('ch')"><span class="i" id="chIco">🔒</span>تحدي الأسبوع</button>
+  </div>
+</nav>
+<div class="toast" id="toast"></div>
+
+<script>
+/* ===== التخزين: يعمل داخل Claude وعلى أي استضافة ===== */
+const KEY='sidq-wall-v1';
+const Store={
+  async load(){
+    try{ if(window.storage){const r=await window.storage.get(KEY,true); return r?JSON.parse(r.value):null;} }catch(e){}
+    try{ const v=localStorage.getItem(KEY); return v?JSON.parse(v):null; }catch(e){}
+    return null;
+  },
+  async save(d){
+    const s=JSON.stringify(d);
+    try{ if(window.storage){await window.storage.set(KEY,s,true);return;} }catch(e){}
+    try{ localStorage.setItem(KEY,s); }catch(e){}
+  }
+};
+let DB={stories:[],challenge:{text:'',open:false},pin:'1234'};
+let isTeacher=false;
+
+const $=id=>document.getElementById(id);
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const ar=n=>String(n).replace(/\d/g,d=>'٠١٢٣٤٥٦٧٨٩'[d]);
+const date=t=>new Date(t).toLocaleDateString('ar-SA',{day:'numeric',month:'long'});
+function toast(m){const t=$('toast');t.textContent=m;t.classList.add('on');setTimeout(()=>t.classList.remove('on'),2200)}
+
+/* نجوم البانر */
+(()=>{const s=$('stars');for(let i=0;i<26;i++){const e=document.createElement('span');e.style.top=Math.random()*90+'%';e.style.right=Math.random()*100+'%';e.style.opacity=.25+Math.random()*.6;s.appendChild(e)}})();
+
+function go(v){
+  document.querySelectorAll('.view').forEach(x=>x.classList.remove('on'));
+  $('v-'+v).classList.add('on');
+  document.querySelectorAll('nav.tabs button').forEach(b=>b.classList.toggle('on',b.dataset.v===v));
+  if(v==='teacher'){ $('tLogin').style.display=isTeacher?'none':'block'; $('tPanel').style.display=isTeacher?'block':'none'; }
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function noteHTML(s){
+  return `<article class="note"><span class="seal">معتمد</span><p>${esc(s.text)}</p>
+  <div class="who"><span>${esc(s.name)}${s.cls?' · '+esc(s.cls):''}</span><span>${date(s.at)}</span></div></article>`;
+}
+
+function render(){
+  const ok=DB.stories.filter(s=>s.status==='ok').sort((a,b)=>b.at-a.at);
+  const empty='<div class="empty">لا توجد مواقف معتمدة بعد. كوني أول من يكتب!</div>';
+  $('latest').innerHTML=ok.length?ok.slice(0,4).map(noteHTML).join(''):empty;
+  $('wall').innerHTML=ok.length?ok.map(noteHTML).join(''):empty;
+  $('wallCount').textContent=ok.length?`${ar(ok.length)} موقفًا معتمدًا`:'كل المواقف المعتمدة تظهر هنا.';
+
+  // السفيرات
+  const m={};ok.forEach(s=>{const k=s.name.trim()+'|'+(s.cls||'');(m[k]=m[k]||{name:s.name,cls:s.cls,n:0}).n++});
+  const list=Object.values(m).sort((a,b)=>b.n-a.n);
+  $('ambList').innerHTML=list.length?list.map(a=>`<div class="amb"><div class="av">${esc(a.name.trim()[0]||'؟')}</div>
+    <div><div class="n">${esc(a.name)}</div><div class="c">${esc(a.cls||'')}</div></div>
+    <div class="k">${'★'.repeat(Math.min(a.n,5))}${a.n>5?' '+ar(a.n):''}</div></div>`).join('')
+    :'<div class="empty">تظهر السفيرات هنا بعد اعتماد أول موقف.</div>';
+
+  // التحدي
+  const c=DB.challenge;
+  $('chIco').textContent=c.open?'🎯':'🔒';
+  $('chBox').innerHTML=c.open&&c.text
+    ?`<h2>تحدي الأسبوع</h2><p class="sub">جرّبيه هذا الأسبوع، ثم اكتبي موقفك.</p><div class="chal">${esc(c.text)}</div>
+      <div class="row" style="margin-top:14px"><button class="btn" onclick="go('home');openForm()">اكتبي موقفك</button></div>`
+    :`<div class="lock"><div class="ico">🔒</div><h2>التحدي مقفل</h2><p class="sub">ستفتحه المعلمة قريبًا.</p></div>`;
+
+  if(isTeacher) renderAdmin();
+}
+
+function renderAdmin(){
+  const p=DB.stories.filter(s=>s.status==='pending').sort((a,b)=>a.at-b.at);
+  $('pending').innerHTML=p.length?p.map(s=>`<div class="pend"><p style="white-space:pre-wrap">${esc(s.text)}</p>
+    <p class="hint">${esc(s.name)}${s.cls?' · '+esc(s.cls):''} — ${date(s.at)}</p>
+    <div class="row" style="margin-top:10px"><button class="btn sm ok" onclick="setStatus('${s.id}','ok')">اعتماد</button>
+    <button class="btn sm no" onclick="del('${s.id}')">رفض</button></div></div>`).join('')
+    :'<div class="empty">لا توجد مواقف جديدة.</div>';
+  const ok=DB.stories.filter(s=>s.status==='ok').sort((a,b)=>b.at-a.at);
+  $('approvedAdmin').innerHTML=ok.length?ok.map(s=>`<div class="pend"><p>${esc(s.text.slice(0,120))}${s.text.length>120?'…':''}</p>
+    <p class="hint">${esc(s.name)}</p><div class="row" style="margin-top:8px">
+    <button class="btn sm alt" onclick="setStatus('${s.id}','pending')">إخفاء</button>
+    <button class="btn sm no" onclick="del('${s.id}')">حذف</button></div></div>`).join('')
+    :'<div class="empty">لا شيء بعد.</div>';
+  $('chText').value=DB.challenge.text||'';
+}
+
+function openForm(){$('formBox').style.display='block';$('fName').focus()}
+function closeForm(){$('formBox').style.display='none'}
+$('fText').addEventListener('input',e=>$('cnt').textContent=ar(e.target.value.length));
+
+async function submitStory(){
+  const name=$('fName').value.trim(),cls=$('fClass').value.trim(),text=$('fText').value.trim();
+  if(!name) return toast('اكتبي اسمك أولًا');
+  if(text.length<15) return toast('اكتبي الموقف في جملة أو أكثر');
+  DB=(await Store.load())||DB;
+  DB.stories.push({id:Date.now().toString(36)+Math.random().toString(36).slice(2,6),name,cls,text,status:'pending',at:Date.now()});
+  await Store.save(DB);
+  $('fText').value='';$('cnt').textContent='٠';closeForm();
+  toast('وصل موقفك! سيظهر بعد اعتماد المعلمة');
+  render();
+}
+
+async function setStatus(id,st){const s=DB.stories.find(x=>x.id===id);if(s){s.status=st;await Store.save(DB);render();toast(st==='ok'?'تم الاعتماد':'تم الإخفاء')}}
+async function del(id){if(!confirm('حذف الموقف نهائيًا؟'))return;DB.stories=DB.stories.filter(x=>x.id!==id);await Store.save(DB);render();toast('تم الحذف')}
+async function saveChallenge(open){
+  const t=$('chText').value.trim();
+  if(open&&!t) return toast('اكتبي نص التحدي أولًا');
+  DB.challenge={text:t,open};await Store.save(DB);render();toast(open?'تم نشر التحدي':'تم قفل التحدي');
+}
+function login(){
+  if($('pin').value===(DB.pin||'1234')){isTeacher=true;$('pin').value='';go('teacher');renderAdmin()}
+  else toast('الرمز غير صحيح');
+}
+function logout(){isTeacher=false;go('home')}
+async function changePin(){
+  const p=$('newPin').value.trim();if(p.length<4) return toast('الرمز ٤ أرقام على الأقل');
+  DB.pin=p;await Store.save(DB);$('newPin').value='';toast('تم حفظ الرمز');
+}
+
+(async()=>{const d=await Store.load();if(d)DB=Object.assign(DB,d);render()})();
+</script>
+</body>
+</html>
